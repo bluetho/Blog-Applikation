@@ -1,6 +1,11 @@
 <?php
-  // Alle Blogs bzw. Benutzernamen holen und falls Blog bereits ausgewählt, entsprechenden Namen markieren
+// Alle Blogs bzw. Benutzernamen holen und falls Blog bereits ausgewählt, entsprechenden Namen markieren
   // Hier Code....
+    foreach($entry as getEntries($_SESSION["bid"])){
+
+    }
+
+    for($i =0;$i<getEntries($_SESSION["bid"]);$i++)
 
   // Schlaufe über alle Blogs bzw. Benutzer
   // Hier Code....

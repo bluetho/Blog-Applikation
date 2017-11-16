@@ -54,7 +54,10 @@
     // Für jede Funktion, die mit ?function=xy in der URL übergeben wird, muss eine Datei (in diesem Fall xy.php) existieren.
 	// Diese Datei wird aufgerufen, um den Content der Seite aufzubereiten und anzuzeigen.
 	if (!file_exists("$function.php")) exit("Die Datei '$function.php' konnte nicht gefunden werden!");
+	$_SESSION["bid"]=$blogId;
+
 	require_once("$function.php");
+
   ?>
   </div>
 </body>
