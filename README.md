@@ -8,8 +8,9 @@
 http://php.net/manual/en/function.strip-tags.php
 
 ## Beispiel SQL Injection
-$password = sha1 ( $password );
-		
+
+
+		$password = sha1 ( $password );		
 		$query = "INSERT INTO $this->tableName (name, passwort, email) VALUES (?, ?, ?)";
 		
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
