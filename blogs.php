@@ -1,19 +1,23 @@
 <?php
 // Alle Blogs bzw. Benutzernamen holen und falls Blog bereits ausgewählt, entsprechenden Namen markieren
   // Hier Code....
-    foreach($entry as getEntries($_SESSION["bid"])){
 
-    }
+    //liste alle Benutzer in einer Liste auf
 
-    for($i =0;$i<getEntries($_SESSION["bid"]);$i++)
+    echo("<div>");
+        foreach(getUserNames() as $user){
+            if($blogId== $user['uid']){
+
+                echo("<div><a href='index.php?function=blogs&bid=$user[uid]' title='Blog auswählen'><h4 style='color:red'>$user[name]</h4></a></div>");
+            }else{
+                echo("<div><a href='index.php?function=blogs&bid=$user[uid]' title='Blog auswählen'><h4>$user[name]</h4></a></div>");
+            }
+        }
+        echo("</div>");
+
 
   // Schlaufe über alle Blogs bzw. Benutzer
   // Hier Code....
 
   // Nachfolgend das Beispiel einer Ausgabe in HTML, dieser Teil muss mit einer Schlaufe über alle Blogs und der Ausgabe mit PHP ersetzt werden
 ?>
-	<div><a href='index.php?function=blogs&bid=4' title='Blog auswählen'><h4>Anna Abegglen</h4></a></div>
-	<div><a href='index.php?function=blogs&bid=2' title='Blog auswählen'><h4>Hans Hinterseer</h4></a></div>
-	<div><a href='index.php?function=blogs&bid=1' title='Blog auswählen'><h4>Marc Muster</h4></a></div>
-	<div><a href='index.php?function=blogs&bid=3' title='Blog auswählen'><h4>Sonja Sauser</h4></a></div>
-

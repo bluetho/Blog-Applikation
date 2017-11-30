@@ -2,9 +2,35 @@
   // Alle Blogeinträge holen, die Blog-ID ist in der Variablen $blogId gespeichert (wird in index.php gesetzt)
   // Hier Code... (Schlaufe über alle Einträge dieses Blogs)
 
-  // Nachfolgend das Beispiel einer Ausgabe in HTML, dieser Teil muss mit einer Schlaufe über alle Blog-Beiträge und der Ausgabe mit PHP ersetzt werden
+
+    if(isset($_SESSION['uid'])&&$_SESSION['uid']!=0){
+        echo("Einträge von eingeloggtem User");
+    }
+    else{
+
+        foreach ( getEntries(($_GET['bid'])) as $entry) {
+            echo("<div >
+                            <a  href='index.php?function=entries_public&bid=$blogId&eid=$entry[eid]'><h4> " . $entry['title'] . date("Y-m-d\   H:i:s", $entry['datetime']) . "</h4></a></div>");
+
+        }
+        if(!isset($_GET['eid'])){
+            echo("Es wurde noch kein Eintrag ausgewählt, wählen Sie einen aus");
+        }
+        else {
+            $entry = getEntry($_GET['eid']);
+            echo("<div>");
+            echo($entry['title'] . " " . date("Y-m-d\   H:i:s", $entry['datetime']) . "\b" . nl2br($entry['content']));
+        }
+}
+
+    
+/*
+
+    foreach($entry as getAllBlogs()){
+        $array.add($entry);
+    }
+    foreach ($arr as $array)
+  */// Nachfolgend das Beispiel einer Ausgabe in HTML, dieser Teil muss mit einer Schlaufe über alle Blog-Beiträge und der Ausgabe mit PHP ersetzt werden
 ?>
-  <div>
-  <h4>Hipster Ipsum, 01.11.2016 16:42:12</h4>
-  Neutra truffaut blog, 90's microdosing gochujang fingerstache helvetica etsy. Shoreditch fashion axe tote bag wayfarers normcore, freegan hot chicken sriracha 8-bit brunch actually live-edge quinoa. Trust fund sustainable forage tilde, etsy gentrify 8-bit poutine blog swag lomo pug. Truffaut ugh pinterest, umami tofu hoodie cronut. Crucifix skateboard single-origin coffee, vape slow-carb pork belly direct trade everyday carry photo booth schlitz venmo franzen. Air plant viral stumptown pabst disrupt. Readymade mumblecore tumeric kitsch hashtag, godard trust fund.
-  </div>
+
+

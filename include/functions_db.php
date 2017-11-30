@@ -78,7 +78,16 @@
 	}
 	return $alle;
   }
+  function getAllBlogs(){
+      $alle = [];
+      $db = getValue('cfg_db');
+      $entries = $db->query("SELECT eid, datetime, title, content, picture1, picture2, picture3 FROM entry ORDER BY eid DESC");
+      while ($entry = $entries->fetchArray()) {
+          $alle[] = $entry;
+      }
+      return $alle;
 
+  }
   /************************************************************************************************
    getEntry: Liefert einen bestimmten Beitrag zurück
    Hinweis:	 Falls in einem ersten Schritt nur die Titel der Beiträge angezeigt werden, kann mit

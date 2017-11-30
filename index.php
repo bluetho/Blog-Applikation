@@ -4,6 +4,9 @@
   require_once("include/functions_db.php");
   require_once("include/functions_db_plus.php");
   define("DBNAME", "db/blog.db");
+  //teste ob eingeloggt
+
+
   // Datenbankverbindung herstellen, diesen Teil nicht ändern!
   if (!file_exists(DBNAME)) exit("Die Datenbank 'blog.db' konnte nicht gefunden werden!");
   $db = new SQLite3(DBNAME);
@@ -38,14 +41,31 @@
   <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
       <div class="navbar-header">
-		<a class="navbar-brand"><?php echo "Blog (Namen einsetzen...)"; ?></a>
+		<a class="navbar-brand"><?php
+            if(isset($_SESSION['uid'])&&$_SESSION['uid']!=0){
+                echo(getUserName($_SESSION['uid']));
+            }
+            else if(isset($blogId)&&$blogId!=0){
+                echo(getUserName($blogId));
+            } else{
+                echo("Kein Blog gewählt");
+            }?></a>
+
       </div>
       <ul class="nav navbar-nav">
-		<?php 
-		  echo "<li><a href='index.php?function=login&bid=$blogId'>Login</a></li>";
-		  echo "<li><a href='index.php?function=blogs&bid=$blogId'>Blog wählen</a></li>";
-		  echo "<li><a href='index.php?function=entries_public&bid=$blogId'>Beiträge anzeigen</a></li>";
-		?>
+		<?php
+        if(isset($_SESSION['uid'])&&$_SESSION['uid']!=0){
+            
+                echo "<li><a href='index.php?function=addEntry&bid=$blogId'>Hinzufügen</a></li>";
+                echo "<li><a href='index.php?function=logout&bid=$blogId'>Logout</a></li>";
+                echo "<li><a href='index.php?function=entries_public&bid=$blogId'>Beiträge anzeigen</a></li>";
+            }
+        else {
+            echo "<li><a href='index.php?function=login&bid=$blogId'>Login</a></li>";
+            echo "<li><a href='index.php?function=blogs&bid=$blogId'>Blog wählen</a></li>";
+            echo "<li><a href='index.php?function=entries_public&bid=$blogId'>Beiträge anzeigen</a></li>";
+        }
+		  ?>
       </ul>
 	</div>
   </nav>
@@ -54,7 +74,6 @@
     // Für jede Funktion, die mit ?function=xy in der URL übergeben wird, muss eine Datei (in diesem Fall xy.php) existieren.
 	// Diese Datei wird aufgerufen, um den Content der Seite aufzubereiten und anzuzeigen.
 	if (!file_exists("$function.php")) exit("Die Datei '$function.php' konnte nicht gefunden werden!");
-	$_SESSION["bid"]=$blogId;
 
 	require_once("$function.php");
 
@@ -65,5 +84,7 @@
 <?php
   // Datenbankverbindung schliessen, diesen Teil nicht ändern!
   $db = getValue('cfg_db');
-  $db->close();
+  try{$db->close();}
+  catch(Ecxeption $e){}
+
 ?>
