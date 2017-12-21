@@ -45,8 +45,8 @@ else if(isset($_GET['newEntry'])&&$_GET['newEntry']==true){
             </form> ");
     }
     else{
-        
-    addEntry($_SESSION['uid'], $_POST['title'], $_POST['content']);
+
+    addEntry($_SESSION['uid'], htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']));
 }}
 
 
