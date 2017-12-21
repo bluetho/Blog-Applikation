@@ -32,7 +32,7 @@ if(isset($_POST['mode'])&&$_POST['mode']=="overWrite"){
 
 
 else if(isset($_GET['newEntry'])&&$_GET['newEntry']==true){
-    if($_POST['title']=='' &&$_POST['content']==''){
+    if($_POST['title']=='' ||$_POST['content']==''){
         echo(" <form method=\"post\" action=\"index.php?function=addEntry&newEntry=true'\">
             <h3>Beide Felder müssen ausgefüllt sein</h3>
             <h4>Titel</h4><br>
@@ -45,6 +45,7 @@ else if(isset($_GET['newEntry'])&&$_GET['newEntry']==true){
             </form> ");
     }
     else{
+        
     addEntry($_SESSION['uid'], $_POST['title'], $_POST['content']);
 }}
 
