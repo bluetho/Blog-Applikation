@@ -55,7 +55,7 @@
       <ul class="nav navbar-nav">
 		<?php
         if(isset($_SESSION['uid'])&&$_SESSION['uid']!=0){
-            
+
                 echo "<li><a href='index.php?function=addEntry&bid=$blogId'>Hinzufügen</a></li>";
                 echo "<li><a href='index.php?function=logout&bid=$blogId'>Logout</a></li>";
                 echo "<li><a href='index.php?function=entries_public&bid=$blogId'>Beiträge anzeigen</a></li>";
